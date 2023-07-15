@@ -1,6 +1,7 @@
 library(rvest)
 library(xml2)
 library(here)
+library(stringr)
 
 #load html from website
 recipe_url <- "https://www.tasteofhome.com/recipes/easy-fresh-strawberry-pie/"
@@ -13,5 +14,17 @@ recipe_name <- page %>%
 
 #extract number of reviews
 recipe_review_count <- page %>%
-  html_node("div.rating a.recipe-comments-scroll") %>%
+  html_node("div.rating") %>%
   html_text()
+
+#extract total time needed
+recipe_totaltime <- page %>%
+  html_node("div.total-time") %>%
+  html_text() %>%
+  str_replace_all("\\s+", " ")
+
+#extract number of portions
+recipe_portion_count <- page %>%
+  html_node("div.makes") %>%
+  html_text() %>%
+  str_replace_all("\\s+", " ")
