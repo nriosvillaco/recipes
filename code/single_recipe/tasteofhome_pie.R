@@ -1,7 +1,6 @@
 library(rvest)
 library(xml2)
 library(here)
-library(stringr)
 
 #load html from website
 recipe_url <- "https://www.tasteofhome.com/recipes/easy-fresh-strawberry-pie/"
