@@ -11,4 +11,8 @@ recipe_name <- recipe_page %>%
   html_node("title") %>%
   html_text()
 
-#extract recipe popularity
+#extract recipe ingredients
+recipe_ingredients <- recipe_page %>%
+  html_node("section#ingredients ul") %>%
+  html_nodes("li") %>%
+  html_text()
