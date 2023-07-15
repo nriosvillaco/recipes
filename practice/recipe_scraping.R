@@ -1,6 +1,7 @@
 library(rvest)
 library(xml2)
 library(here)
+library(dplyr)
 
 #find practice file path
 path <- here("practice", "practice_recipe.html")
@@ -27,4 +28,9 @@ recipe_prep <- recipe_page %>%
   #selects <ul> element following previous selection
   html_node(xpath = "./following-sibling::ul[1]") %>%
   html_nodes("li") %>%
+  html_text()
+
+#extract reviews
+recipe_reviews <- recipe_page %>%
+  html_nodes("tr td") %>%
   html_text()
