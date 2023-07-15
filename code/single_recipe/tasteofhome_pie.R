@@ -28,3 +28,9 @@ recipe_portion_count <- page %>%
   html_node("div.makes") %>%
   html_text() %>%
   str_replace_all("\\s+", " ")
+
+#extract ingredients
+recipe_ingredients <- page %>%
+  html_node("ul.recipe-ingredients__list") %>%
+  html_nodes("li") %>%
+  html_text()
