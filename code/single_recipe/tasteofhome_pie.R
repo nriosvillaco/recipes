@@ -34,3 +34,9 @@ recipe_ingredients <- page %>%
   html_node("ul.recipe-ingredients__list") %>%
   html_nodes("li") %>%
   html_text()
+
+#extract directions
+recipe_directions <- page %>%
+  html_nodes("li.recipe-directions__item") %>%
+  html_nodes("span") %>%
+  html_text()
