@@ -11,12 +11,12 @@ page <- read_html(recipe_url)
 
 #create list of selectors
 selectors <- list(
-  recipe_name = "title",
-  recipe_review_count = "div.rating",
-  recipe_totaltime = "div.total-time",
-  recipe_portion_count = "div.makes",
-  recipe_ingredients = "ul.recipe-ingredients__list li",
-  recipe_directions = "ol.recipe-directions__list li span"
+  name = "title",
+  reviews = "div.rating",
+  total_time = "div.total-time",
+  servings = "div.makes",
+  ingredients = "ul.recipe-ingredients__list li",
+  directions = "ol.recipe-directions__list li span"
 )
 
 
