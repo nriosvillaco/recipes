@@ -10,12 +10,14 @@ page <- read_html(recipe_url)
 #extract recipe name
 recipe_name <- page %>%
   html_node("title") %>%
-  html_text()
+  html_text() %>%
+  str_replace_all("\\s+", " ")
 
 #extract number of reviews
 recipe_review_count <- page %>%
   html_node("div.rating") %>%
-  html_text()
+  html_text() %>%
+  str_replace_all("\\s+", " ")
 
 #extract total time needed
 recipe_totaltime <- page %>%
@@ -33,10 +35,12 @@ recipe_portion_count <- page %>%
 recipe_ingredients <- page %>%
   html_node("ul.recipe-ingredients__list") %>%
   html_nodes("li") %>%
-  html_text()
+  html_text() %>%
+  str_replace_all("\\s+", " ")
 
 #extract directions
 recipe_directions <- page %>%
   html_nodes("li.recipe-directions__item") %>%
   html_nodes("span") %>%
-  html_text()
+  html_text() %>%
+  str_replace_all("\\s+", " ")
