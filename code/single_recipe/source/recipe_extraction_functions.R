@@ -1,12 +1,9 @@
-library(rvest)
-library(xml2)
-library(here)
-library(stringr)
-
-
 #load html from website
-recipe_url <- "https://www.tasteofhome.com/recipes/easy-fresh-strawberry-pie/"
-page <- read_html(recipe_url)
+read_content <- function(url)
+{
+  page <- read_html(url)
+  return(page)
+}
 
 
 #create list of selectors
@@ -28,7 +25,7 @@ extract_details <- function(html_code, selectors)
   #extract the corresponding information for each selector
   for(selector in names(selectors))
   {
-    extracted_info <- page %>%
+    extracted_info <- webpage %>%
       html_nodes(selectors[[selector]]) %>%
       html_text() %>%
       str_replace_all("\\s+", " ")
