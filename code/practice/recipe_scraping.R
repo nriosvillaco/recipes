@@ -3,7 +3,7 @@ library(xml2)
 library(here)
 
 #find practice file path, load html
-path <- here("practice", "practice_recipe.html")
+path <- here("code/practice", "practice_recipe.html")
 recipe_page <- read_html(path)
 
 #extract recipe name
