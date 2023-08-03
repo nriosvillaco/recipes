@@ -28,7 +28,8 @@ extract_details <- function(html_code, selectors)
     extracted_info <- webpage %>%
       html_nodes(selectors[[selector]]) %>%
       html_text() %>%
-      str_replace_all("\\s+", " ")
+      str_replace_all("\\s+", " ") %>%
+      trimws()
     details[[selector]] <- extracted_info
   }
   return(details)
