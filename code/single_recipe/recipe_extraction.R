@@ -16,3 +16,6 @@ webpage <- read_content(url)
 
 #extract recipe details
 recipe_details <- extract_details(webpage, selectors)
+
+#clean up data
+recipe_details[["name"]] <- recipe_details[["name"]][1]
