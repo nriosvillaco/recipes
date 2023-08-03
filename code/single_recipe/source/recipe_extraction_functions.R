@@ -9,7 +9,7 @@ read_content <- function(url)
 #create list of selectors
 selectors <- list(
   name = "title",
-  reviews = "div.rating",
+  number_reviews = "div.rating",
   total_time = "div.total-time",
   servings = "div.makes",
   ingredients = "ul.recipe-ingredients__list li",
@@ -28,7 +28,8 @@ extract_details <- function(html_code, selectors)
     extracted_info <- webpage %>%
       html_nodes(selectors[[selector]]) %>%
       html_text() %>%
-      str_replace_all("\\s+", " ")
+      str_replace_all("\\s+", " ") %>%
+      trimws()
     details[[selector]] <- extracted_info
   }
   return(details)

@@ -16,3 +16,8 @@ webpage <- read_content(url)
 
 #extract recipe details
 recipe_details <- extract_details(webpage, selectors)
+
+#clean up data
+recipe_details[["name"]] <- recipe_details[["name"]][1]
+recipe_details[["number_reviews"]] <- as.numeric(gsub("\\D", "", recipe_details[["number_reviews"]]))
+recipe_details[["servings"]] <- as.numeric(gsub("\\D", "", recipe_details[["servings"]]))
