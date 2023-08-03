@@ -9,7 +9,7 @@ read_content <- function(url)
 #create list of selectors
 selectors <- list(
   name = "title",
-  reviews = "div.rating",
+  number_reviews = "div.rating",
   total_time = "div.total-time",
   servings = "div.makes",
   ingredients = "ul.recipe-ingredients__list li",
