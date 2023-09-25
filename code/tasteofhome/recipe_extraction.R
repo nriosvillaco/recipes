@@ -8,8 +8,12 @@ library(stringr)
 extraction <- here("code/tasteofhome/source", "recipe_extraction_functions.R")
 source(extraction)
 
+recipe_page <- 'https://www.tasteofhome.com/recipes/'
 
-#load html from website
+
+#load url block
+recipe_block_urls <- load_recipe_block_urls(recipe_page)
+
 recipe_urls <- c(
   "https://www.tasteofhome.com/recipes/easy-fresh-strawberry-pie/",
   "https://www.tasteofhome.com/recipes/creamy-tomato-fettuccine-with-zucchini/",
