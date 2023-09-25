@@ -1,3 +1,23 @@
+#load recipe block url
+load_recipe_block_urls <- function(recipe_page)
+{
+  recipe_page_html <- read_content(recipe_page)
+  #select url from CSS selectors
+  main_content_card <- html_code %>%
+    html_node("#content > section.module-1 > div:nth-child(1) > div > div > div > div.category-card-content > a")
+  #extract href attribute
+  content_url <- if (!is.null(main_content_card)) {
+    url <- main_content_card %>% 
+      html_attr("href")
+    print(url)
+  } else {
+    print("URL not found")
+  }
+}
+
+#load individual recipe urls----------------------------
+
+
 #load html from website
 read_content <- function(url)
 {
