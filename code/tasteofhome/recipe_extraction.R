@@ -2,6 +2,7 @@ library(rvest)
 library(xml2)
 library(here)
 library(stringr)
+library(tidyverse)
 
 
 #load recipe_extraction_functions
@@ -14,18 +15,10 @@ recipe_page <- 'https://www.tasteofhome.com/recipes/'
 #load url block
 recipe_block_urls <- load_recipe_block_urls(recipe_page)
 
-recipe_urls <- c(
-  "https://www.tasteofhome.com/recipes/easy-fresh-strawberry-pie/",
-  "https://www.tasteofhome.com/recipes/creamy-tomato-fettuccine-with-zucchini/",
-  "https://www.tasteofhome.com/article/mexican-street-corn-salad-esquites/",
-  "https://www.tasteofhome.com/recipes/greek-chicken-meat-loaf/",
-  "https://www.tasteofhome.com/article/crispy-pork-belly/",
-  "https://www.tasteofhome.com/recipes/pesto-chicken-bake/",
-  "https://www.tasteofhome.com/recipes/salmon-tacos-fish-tacos/",
-  "https://www.tasteofhome.com/recipes/planter-s-punch/",
-  "https://www.tasteofhome.com/article/cookie-salad/",
-  "https://www.tasteofhome.com/recipes/cherries-jubilee/"
-)
+#load individual recipes
+recipe_urls <- load_urls_from_blocks(recipe_block_urls)
+recipe_urls <- clean_recipe_urls(recipe_urls)
+recipe_urls
 
 #extract recipe details
 all_recipes_details <- list()
@@ -48,3 +41,19 @@ for (i in seq_along(all_recipes_details))
   
   all_recipes_details[[i]] <- recipe_details
 }
+
+
+
+#save data
+recipe_data <- as.data.frame(do.call(rbind, all_recipes_details), stringsAsFactors = FALSE)
+colnames(recipe_data) <- c(
+  "name",
+  "number_reviews",
+  "total_time",
+  "servings",
+  "ingredients",
+  "directions"
+)
+
+saved_filepath <- here("data")
+save(recipe_data, file = paste0(saved_filepath, "/", "recipe_data.RData"))
