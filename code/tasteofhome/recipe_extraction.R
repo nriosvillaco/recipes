@@ -30,7 +30,7 @@ for(url in recipe_urls)
 {
   html_code <- read_content(url)
   
-  recipe_details <- extract_details(html_code, selectors)
+  recipe_details <- extract_details(html_code, selectors, extraction_date, url)
   all_recipes_details[[length(all_recipes_details) + 1]] <- recipe_details
 }
 
@@ -50,6 +50,8 @@ for (i in seq_along(all_recipes_details))
 #save data
 recipe_data <- as.data.frame(do.call(rbind, all_recipes_details), stringsAsFactors = FALSE)
 colnames(recipe_data) <- c(
+  "extraction_date",
+  "url",
   "name",
   "number_reviews",
   "total_time",
