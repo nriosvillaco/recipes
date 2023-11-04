@@ -11,6 +11,9 @@ source(extraction)
 
 recipe_page <- 'https://www.tasteofhome.com/recipes/'
 
+#set extraction date
+extraction_date <- Sys.time() %>%
+  format(format = "%m-%d-%Y")
 
 #load url block
 recipe_block_urls <- load_recipe_block_urls(recipe_page)
