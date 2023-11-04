@@ -75,10 +75,13 @@ selectors <- list(
 
 
 #extract recipe details from HTML code
-extract_details <- function(html_code, selectors)
+extract_details <- function(html_code, selectors, extraction_date, url)
 {
   #create empty list
   details <- list()
+  #add date and url
+  details$extraction_date <- extraction_date
+  details$url <- url
   #extract the corresponding information for each selector
   for(selector in names(selectors))
   {
