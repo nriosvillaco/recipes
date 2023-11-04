@@ -46,8 +46,18 @@ for (i in seq_along(all_recipes_details))
 }
 
 
+#load previous data
+saved_filepath <- here("data")
 
-#save data
+if (file.exists("data/recipe_data.RData")) {
+  load("data/recipe_data.RData")
+  loaded_data <- recent_recipe_data
+  rm(recent_recipe_data)
+} else {
+  loaded_data <- data.frame() #create an empty data frame if the file doesn't exist
+}
+
+#append new data
 recipe_data <- as.data.frame(do.call(rbind, all_recipes_details), stringsAsFactors = FALSE)
 colnames(recipe_data) <- c(
   "extraction_date",
@@ -60,5 +70,7 @@ colnames(recipe_data) <- c(
   "directions"
 )
 
-saved_filepath <- here("data")
-save(recipe_data, file = paste0(saved_filepath, "/", "recipe_data.RData"))
+#combine loaded data with new data
+recent_recipe_data <- rbind(loaded_data, recipe_data)
+
+save(recent_recipe_data, file = paste0(saved_filepath, "/", "recipe_data.RData"))
