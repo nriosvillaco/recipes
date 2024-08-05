@@ -28,6 +28,9 @@ all_recipes_details <- list()
 
 for(url in recipe_urls)
 {
+  #introduce a delay to avoid hitting rate limits
+  Sys.sleep(1) #adjust number of seconds as needed
+  
   html_code <- read_content(url)
   
   recipe_details <- extract_details(html_code, selectors, extraction_date, url)
